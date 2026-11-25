@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sugestão de Presente | Adrio &amp; Mariana</title>
+    <meta name="description" content="Sugestão de presente para o casamento de Adrio &amp; Mariana - 30 de Janeiro de 2027.">
+
+    <meta property="og:title" content="Sugestão de Presente | Adrio &amp; Mariana ⚜️">
+    <meta property="og:description" content="Dividir esse momento especial com você é o que mais desejamos.">
+    <meta property="og:image" content="assets/garden-ballroom.png">
+    <meta property="og:type" content="website">
+
+    <!-- Regency Fonts (including Great Vibes cursive script for couple names) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Pinyon+Script&family=Italianno&family=Monsieur+La+Doulaise&family=Great+Vibes&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #1e1a22;
+            background-image: radial-gradient(#2d2833 1px, transparent 1px);
+            background-size: 24px 24px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: #2a2430;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background-color: #FAF7F2;
+            position: relative;
+            box-shadow: 0 25px 60px -12px rgba(18, 14, 22, 0.65);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* --- SHEER WHITE CHIFFON CURTAINS --- */
+        #curtain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            pointer-events: none;
+            display: none;
+            overflow: hidden;
+        }
+
+        #curtain-overlay.visible {
+            display: block;
+            pointer-events: all;
+        }
+
+        #curtain-overlay.parting {
+            pointer-events: none;
+        }
+
+        .curtain-panel {
+            position: absolute;
+            top: -4%;
+            width: 56%;
+            height: 108%;
+            background-image:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(250, 247, 242, 0.74) 50%, rgba(255, 255, 255, 0.90) 100%),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.92) 0px,
+                    rgba(235, 229, 242, 0.56) 14px,
+                    rgba(255, 255, 255, 0.96) 28px,
+                    rgba(227, 233, 224, 0.52) 42px
+                );
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
+            will-change: transform, opacity;
+            transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.25s ease;
+        }
+
+        .curtain-left {
+            left: -2%;
+            transform-origin: top left;
+            transform: translateX(0%) skewX(0deg);
+            opacity: 0.98;
+            border-right: 1px solid rgba(180, 148, 92, 0.25);
+            box-shadow: 12px 0 42px rgba(255, 255, 255, 0.68);
+        }
+
+        .curtain-right {
+            right: -2%;
+            transform-origin: top right;
+            transform: translateX(0%) skewX(0deg);
+            opacity: 0.98;
+            border-left: 1px solid rgba(180, 148, 92, 0.25);
+            box-shadow: -12px 0 42px rgba(255, 255, 255, 0.68);
+        }
+
+        #curtain-overlay.closing .curtain-panel {
+            transition: transform 0.65s cubic-bezier(0.32, 0, 0.24, 1), opacity 0.5s ease;
+        }
+
+        #curtain-overlay.closed .curtain-left {
+            transform: translateX(0%) skewX(0deg);
+            opacity: 0.98;
+        }
+
+        #curtain-overlay.closed .curtain-right {
+            transform: translateX(0%) skewX(0deg);
+            opacity: 0.98;
+        }
+
+        #curtain-overlay.parting .curtain-left {
+            transform: translateX(-106%) skewX(-3.5deg);
+            opacity: 0;
+        }
+
+        #curtain-overlay.parting .curtain-right {
+            transform: translateX(106%) skewX(3.5deg);
+            opacity: 0;
+        }
+
+        .curtain-crest {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 3;
+            font-size: 32px;
+            color: #b4945c;
+            text-shadow: 0 2px 18px rgba(255, 255, 255, 0.95);
+            opacity: 0.92;
+            transition: opacity 0.45s ease, transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        #curtain-overlay.parting .curtain-crest {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.12);
+        }
+
+        /* --- FLOATING PETALS --- */
+        .petals-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 80;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.8; }
+            85% { opacity: 0.8; }
+            100% { top: 110%; transform: translateX(80px) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- GARDEN BALLROOM & GIFT CARD --- */
+        .gifts-scroll {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #FAF7F2;
+            padding-bottom: 64px;
+        }
+
+        .ballroom-hero {
+            width: 100%;
+            position: relative;
+        }
+
+        .ballroom-hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gifts-card {
+            width: 100%;
+            margin-top: -18px;
+            position: relative;
+            z-index: 2;
+            padding: 6px 26px 10px 26px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gifts-ornament {
+            font-size: 20px;
+            color: #b4945c;
+            margin-bottom: 10px;
+        }
+
+        .gifts-subtitle {
+            font-size: 13px;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: #7c6f85;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .gifts-message {
+            font-size: 20px;
+            line-height: 1.55;
+            color: #352d3c;
+            max-width: 390px;
+            margin-bottom: 20px;
+        }
+
+        .gifts-message p + p {
+            margin-top: 12px;
+        }
+
+        .gifts-signoff {
+            font-style: italic;
+            font-size: 19px;
+            color: #5d5266;
+            margin-top: 6px;
+            margin-bottom: 4px;
+        }
+
+        .couple-cursive {
+            font-family: 'Monsieur La Doulaise', cursive;
+            font-size: 36px;
+            line-height: 1.25;
+            color: #3d3345;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .regency-divider {
+            width: 130px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(180, 148, 92, 0.65), transparent);
+            margin: 2px auto 22px auto;
+        }
+
+        .gift-note-card {
+            width: 100%;
+            max-width: 370px;
+            padding: 24px 20px;
+            border: 1px solid rgba(180, 148, 92, 0.42);
+            border-radius: 12px;
+            background: linear-gradient(180deg, #ffffff 0%, #f9f6f0 100%);
+            box-shadow: 0 12px 30px rgba(61, 51, 69, 0.08);
+            text-align: center;
+        }
+
+        .gift-note-title {
+            margin-bottom: 10px;
+            color: #7c6f85;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .gift-note-message {
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            width: 100%;
+            max-width: 370px;
+            padding: 16px 20px;
+            border-radius: 6px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 14px;
+            letter-spacing: 0.17em;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(42, 36, 48, 0.08);
+            font-weight: 600;
+            margin-top: 22px;
+        }
+
+        .btn-maps {
+            background-color: #ffffff;
+            color: #3d3345;
+            border: 1px solid #d4c7b5;
+        }
+
+        .btn-maps:hover {
+            background-color: #f7f3ec;
+            border-color: #b4945c;
+        }
+
+        .footer-note {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: #8c8291;
+            letter-spacing: 0.08em;
+            text-align: center;
+            margin-top: 18px;
+            line-height: 1.7;
+        }
+
+        #music-toggle {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            z-index: 95;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(250, 247, 242, 0.94);
+            border: 1px solid #c9bdad;
+            box-shadow: 0 6px 20px rgba(42, 36, 48, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #music-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: #3d3345;
+        }
+
+        #music-toggle.muted svg {
+            fill: #a99fae;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="petals-container" id="petals"></div>
+
+    <!-- Starts veiled behind sheer white curtains, then sweeps open on load -->
+    <div id="curtain-overlay" class="visible closed" aria-hidden="true">
+        <div class="curtain-panel curtain-left"></div>
+        <div class="curtain-panel curtain-right"></div>
+        <div class="curtain-crest">⚜️</div>
+    </div>
+
+    <div class="app-container">
+        <main class="gifts-scroll">
+            <div class="ballroom-hero">
+                <img src="assets/garden-ballroom.png" alt="Noivos dançando no salão de festa jardim em estilo Bridgerton cercados por convidados">
+            </div>
+
+            <div class="gifts-card">
+                <div class="gifts-ornament">⚜️</div>
+                <div class="gifts-subtitle">Sugestão de Presente</div>
+
+                <div class="gifts-message">
+                    <p>Dividir esse momento especial com você é o que mais desejamos.</p>
+                    <p>Não fizemos lista de casamento. Sugestões e informações sobre presentes serão compartilhadas diretamente com os convidados.</p>
+                </div>
+
+                <p class="gifts-signoff">Com carinho e respeito,</p>
+                <h1 class="couple-cursive">Adrio &amp; Mariana</h1>
+
+                <div class="regency-divider"></div>
+
+                <div class="gift-note-card">
+                    <div class="gift-note-title">Informações sobre presentes</div>
+                    <p class="gift-note-message">As informações serão compartilhadas diretamente com os convidados.</p>
+                </div>
+
+                <a class="btn btn-maps" href="bridgerton.html#aberto" onclick="returnToInvitation(event)">
+                    <span>&larr;</span>
+                    <span>Voltar ao Convite</span>
+                </a>
+
+                <div class="footer-note">
+                    Adrio &amp; Mariana &bull; 30 de Janeiro de 2027<br>
+                    Local informado diretamente aos convidados
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="music-toggle" class="muted" onclick="toggleAudio()" title="Ligar / Desligar Música">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </div>
+
+    <audio id="bg-audio" loop preload="auto">
+        <source src="assets/musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const curtainOverlay = document.getElementById('curtain-overlay');
+        const audio = document.getElementById('bg-audio');
+        const musicToggle = document.getElementById('music-toggle');
+
+        // Sweep open the sheer white curtains shortly after images load
+        window.addEventListener('load', () => {
+            spawnPetals();
+            setTimeout(() => {
+                curtainOverlay.classList.remove('closed');
+                curtainOverlay.classList.add('parting');
+                setTimeout(() => {
+                    curtainOverlay.classList.remove('visible', 'parting');
+                }, 1450);
+            }, 220);
+        });
+
+        function returnToInvitation(event) {
+            event.preventDefault();
+            curtainOverlay.classList.remove('parting');
+            curtainOverlay.classList.add('visible', 'closing');
+            void curtainOverlay.offsetWidth;
+            curtainOverlay.classList.add('closed');
+            setTimeout(() => {
+                window.location.href = 'bridgerton.html#aberto';
+            }, 680);
+        }
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.volume = 0.5;
+                audio.play();
+                musicToggle.classList.remove('muted');
+            } else {
+                audio.pause();
+                musicToggle.classList.add('muted');
+            }
+        }
+
+        function spawnPetals() {
+            const container = document.getElementById('petals');
+            const colors = [
+                'linear-gradient(135deg, rgba(230, 218, 245, 0.85), rgba(255, 255, 255, 0.95))',
+                'linear-gradient(135deg, rgba(255, 250, 245, 0.9), rgba(240, 235, 225, 0.85))',
+                'linear-gradient(135deg, rgba(215, 228, 215, 0.8), rgba(245, 250, 245, 0.9))'
+            ];
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                const size = 10 + Math.random() * 14;
+                petal.style.width = size + 'px';
+                petal.style.height = (size * 1.4) + 'px';
+                petal.style.left = (Math.random() * 100) + '%';
+                petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+                petal.style.animationDuration = (4.5 + Math.random() * 5) + 's';
+                petal.style.animationDelay = (Math.random() * 3) + 's';
+                container.appendChild(petal);
+            }
+        }
+    </script>
+</body>
+</html>
